@@ -3,11 +3,16 @@ function generateBlock(number, color) {
 
     block.className += ' ' + 'block-style';
     block.style.background = color;
-    block.style.width = '50px';
-    block.style.height = '50px';
     block.innerText = number + '';
 
+    const deg = number % 2 === 0 ? getDegrees() : -1 * getDegrees();
+    block.style.transform = 'rotate(' + deg + 'deg)';
+
     return block;
+}
+
+function getDegrees() {
+    return Math.random() * 90;
 }
 
 function getRandomColor() {
@@ -19,11 +24,26 @@ function getRandomColor() {
     return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
 }
 
-function appendBlocks() {
+function createBlocks() {
     const container = document.querySelector('.blocks');
 
     container.innerHTML = '';
     for (let i = 0; i < 20; i++) {
         container.append(generateBlock(i + 1, getRandomColor()));
+    }
+}
+
+let garlandInterval;
+
+function garland() {
+    const garlandBtn = document.querySelector('#garland');
+    if (garlandInterval) {
+        clearInterval(garlandInterval);
+        garlandInterval = undefined;
+        garlandBtn.innerHTML = "Christmas Garland [Turn On]";
+    }
+    else {
+        garlandInterval = setInterval(createBlocks, 350);
+        garlandBtn.innerHTML = "Christmas Garland [Turn Off]";
     }
 }
