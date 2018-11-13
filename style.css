@@ -13,14 +13,6 @@
     margin: 10px;
 }
 
-.block-even {
-    transform: rotate(45deg);
-}
-
-.block-odd {
-    transform: rotate(-45deg);
-}
-
 button {
     margin: 20px;
 }
